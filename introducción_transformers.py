@@ -8,58 +8,6 @@ Original file is located at
 """
 
 import numpy as np
-frase="el modelo emplea proyecciones lineales y puntuaciones"
-palabras=frase.split()
-vocabulario = {
-    word:i
-    for i, word in enumerate(dict.fromkeys(palabras))}
-token_ids=[vocabulario[token] for token in palabras]
-vocab_size=len(vocabulario)
-dimension=4
-d_k=dimension-2
-E=np.random.randn(vocab_size,dimension)
-print(E)
-
-X=E[token_ids]
-print("Matriz de Incrustación X:")
-print(X)
-
-W_Q=np.random.randn(dimension,d_k)
-W_K=np.random.randn(dimension,d_k)
-W_V=np.random.randn(dimension,d_k)
-print("W_Q:")
-print(W_Q)
-print("W_K:")
-print(W_K)
-print("W_V:")
-print(W_V)
-
-Q=X@W_Q
-K=X@W_K
-V=X@W_V
-print("Q:")
-print(Q)
-print("K:")
-print(K)
-print("V:")
-print(V)
-
-puntajes=(Q@K.T)/np.sqrt(d_k)
-print("Puntajes de atención:")
-print(puntajes)
-
-def softmax(x):
-    exp_x=np.exp(x-np.max(x,axis=1,keepdims=True))
-    return exp_x/np.sum(exp_x,axis=1,keepdims=True)
-pesos_atencion = softmax(puntajes)
-print("Pesos de atención:")
-print(pesos_atencion)
-
-Y=pesos_atencion@V
-print("Salida Y:")
-print(Y)
-
-import numpy as np
 
 # -------------------------
 # 1. FRASE Y VOCABULARIO
